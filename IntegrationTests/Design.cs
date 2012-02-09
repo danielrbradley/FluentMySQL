@@ -43,5 +43,23 @@ namespace IntegrationTests
             var actual = query.BuildSql();
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void SelectFromWhere()
+        {
+            var query = Query.Select("page_id", "title", "created", "modified").From("page").Where("`title` = @arg1");
+            var expected = "SELECT `page_id`, `title`, `created`, `modified` FROM `page` WHERE `title` = @arg1;";
+            var actual = query.BuildSql();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void SelectFromWhereAnd()
+        {
+            var query = Query.Select("page_id", "title", "created", "modified").From("page").Where("`title` = @arg1").And("`author` = @author");
+            var expected = "SELECT `page_id`, `title`, `created`, `modified` FROM `page` WHERE `title` = @arg1 AND `author` = @author;";
+            var actual = query.BuildSql();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

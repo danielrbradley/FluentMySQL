@@ -7,6 +7,16 @@ namespace FluentMySql
 {
     public partial class SelectQuery
     {
+        private IFromExpression fromTableReference;
+
+        public IFromExpression FromTableReference
+        {
+            get
+            {
+                return fromTableReference;
+            }
+        }
+
         public SelectQuery From(params string[] tableReferencePath)
         {
             if (this.fromTableReference != null)
