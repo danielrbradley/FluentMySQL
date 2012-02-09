@@ -8,6 +8,16 @@ namespace FluentMySql
 {
     public partial class SelectQuery
     {
+        private SelectExpressionList selectExpressions;
+
+        public IList<ISelectExpression> SelectExpressions
+        {
+            get
+            {
+                return selectExpressions.AsReadOnly();
+            }
+        }
+
         public SelectQuery Select(params object[] selectExpressions)
         {
             if (selectExpressions.Length == 0)

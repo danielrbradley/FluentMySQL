@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndCondition.cs" />
+    <Compile Include="CustomCondition.cs" />
+    <Compile Include="ICondition.cs" />
+    <Compile Include="SelectQuery_Where.cs" />
     <Compile Include="Core\Name.cs" />
     <Compile Include="Core\QualifiedName.cs" />
-    <Compile Include="Op.cs" />
-    <Compile Include="Param.cs" />
     <Compile Include="SelectExpressionList.cs" />
     <Compile Include="SelectQuery_Select.cs" />
     <Compile Include="CustomTableReference.cs" />

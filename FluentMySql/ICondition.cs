@@ -5,9 +5,8 @@ using System.Text;
 
 namespace FluentMySql
 {
-    public enum Op
+    public interface ICondition : IQuery
     {
-        Equals,
-        Like
+        new ICondition Clone();
     }
 }
