@@ -10,18 +10,18 @@ namespace FluentMySql
     public class FromTable : IFromExpression
     {
         public FromTable(params string[] tableReferencePath)
-            : this(new QualifiedObject(tableReferencePath))
+            : this(new QualifiedName(tableReferencePath))
         {
         }
 
-        public FromTable(QualifiedObject table)
+        public FromTable(QualifiedName table)
         {
             this.table = table;
         }
 
-        private QualifiedObject table;
+        private QualifiedName table;
 
-        public QualifiedObject Table
+        public QualifiedName Table
         {
             get
             {

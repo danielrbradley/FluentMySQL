@@ -5,34 +5,34 @@ using System.Text;
 
 namespace FluentMySql.Core
 {
-    public class QualifiedObject : IQuery
+    public class QualifiedName : IQuery
     {
-        public QualifiedObject(string objectPath)
+        public QualifiedName(string objectPath)
             : this(objectPath.Split('.'))
         {
         }
 
-        public QualifiedObject(params string[] objectPath)
+        public QualifiedName(params string[] objectPath)
         {
             if (objectPath.Length == 0)
                 throw new ArgumentException("A qualified object must include at least the object name.");
             if (objectPath.Length == 1 && objectPath[0].Contains('.'))
                 objectPath = objectPath[0].Split('.');
 
-            this.objectPath = new List<UnqualifiedObject>(objectPath.Length);
+            this.objectPath = new List<Name>(objectPath.Length);
             for (int i = 0; i < objectPath.Length; i++)
             {
                 var segment = objectPath[i];
                 if (!Utils.Objects.IsValidObject(segment))
                     throw new ArgumentException("objectPath segment not valid.", string.Format("objectPath[{0}]", i));
 
-                this.objectPath.Add(new UnqualifiedObject(segment));
+                this.objectPath.Add(new Name(segment));
             }
         }
 
-        private List<UnqualifiedObject> objectPath;
+        private List<Name> objectPath;
 
-        public IList<UnqualifiedObject> ObjectPath
+        public IList<Name> ObjectPath
         {
             get
             {
@@ -45,9 +45,9 @@ namespace FluentMySql.Core
             return string.Join(".", this.objectPath.Select(s => s.BuildSql()));
         }
 
-        public QualifiedObject Clone()
+        public QualifiedName Clone()
         {
-            return (QualifiedObject)this.MemberwiseClone();
+            return (QualifiedName)this.MemberwiseClone();
         }
 
         IQuery IQuery.Clone()

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace FluentMySql.Core
 {
-    public class UnqualifiedObject : IQuery
+    public class Name : IQuery
     {
-        public UnqualifiedObject(string objectPath)
+        public Name(string objectPath)
         {
             if (!Utils.Objects.IsValidObject(objectPath))
                 throw new FormatException("Invalid object format.");
@@ -27,12 +27,12 @@ namespace FluentMySql.Core
 
         public string BuildSql()
         {
-            return string.Format("`{0}`", this.value);
+            return string.Format("`{0}`", this.Value);
         }
 
-        public UnqualifiedObject Clone()
+        public Name Clone()
         {
-            return (UnqualifiedObject)this.MemberwiseClone();
+            return (Name)this.MemberwiseClone();
         }
 
         IQuery IQuery.Clone()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace FluentMySql
 {
@@ -19,16 +20,20 @@ namespace FluentMySql
             if (selectExpressions.Length == 0)
                 return;
 
+            if (selectExpressions.Length == 1 && selectExpressions[0] is IEnumerable)
+            {
+                selectExpressions = ((IEnumerable)selectExpressions[0]).Cast<object>().ToArray();
+            }
+
             for (int i = 0; i < selectExpressions.Length; i++)
             {
                 var selectExpression = selectExpressions[i];
                 if (selectExpression == null)
                     throw new ArgumentNullException(string.Format("selectExpressions[{0}]", i), "selectExpression is null.");
 
-                var type = selectExpression.GetType();
-                if (type == typeof(string))
+                if (selectExpression is string)
                     this.Add(SelectExpression.ParseSelectExpression((string)selectExpression));
-                else if (type.IsSubclassOf(typeof(ISelectExpression)))
+                else if (selectExpression is ISelectExpression)
                     this.Add((ISelectExpression)selectExpression);
                 else
                     throw new ArgumentException("Select expression not a string or ISelectExpression.", string.Format("selectExpressions[{0}]", i));

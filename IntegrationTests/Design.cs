@@ -13,8 +13,24 @@ namespace IntegrationTests
         [TestMethod]
         public void SelectFrom()
         {
-            var query = Query.Select("id", "title", "create", "modified").From("pages");
-            var expected = "SELECT `id`, `title`, `create`, `modified` FROM `pages`;";
+            var query = Query.Select("page_id", "title", "created", "modified").From("page");
+            var expected = "SELECT `page_id`, `title`, `created`, `modified` FROM `page`;";
+            var actual = query.BuildSql();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void SelectFromPredefined()
+        {
+            var selectColumns = new List<SelectExpression>()
+            {
+                new SelectExpression("page_id").As("id"),
+                new SelectExpression("title"),
+                new SelectExpression("created"),
+                new SelectExpression("modified")
+            };
+            var query = Query.Select(selectColumns).From("page");
+            var expected = "SELECT `page_id` AS `id`, `title`, `created`, `modified` FROM `page`;";
             var actual = query.BuildSql();
             Assert.AreEqual(expected, actual);
         }

@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\UnqualifiedObject.cs" />
-    <Compile Include="Core\QualifiedObject.cs" />
+    <Compile Include="Core\Name.cs" />
+    <Compile Include="Core\QualifiedName.cs" />
     <Compile Include="SelectExpressionList.cs" />
     <Compile Include="SelectQuery_Select.cs" />
     <Compile Include="CustomTableReference.cs" />

@@ -10,21 +10,21 @@ namespace FluentMySql
     public class SelectExpression : ISelectExpression
     {
         public SelectExpression(string selection)
-            : this(new QualifiedObject(selection))
+            : this(new QualifiedName(selection))
         {
         }
 
         public SelectExpression(string selection, string alias)
-            : this(new QualifiedObject(selection), new UnqualifiedObject(alias))
+            : this(new QualifiedName(selection), new Name(alias))
         {
         }
 
-        public SelectExpression(QualifiedObject selection)
+        public SelectExpression(QualifiedName selection)
             : this(selection, null)
         {
         }
 
-        public SelectExpression(QualifiedObject selection, UnqualifiedObject alias)
+        public SelectExpression(QualifiedName selection, Name alias)
         {
             if (selection == null)
                 throw new ArgumentNullException("selection", "selection is null.");
@@ -33,10 +33,10 @@ namespace FluentMySql
             this.alias = alias;
         }
 
-        private QualifiedObject selection;
-        private UnqualifiedObject alias;
+        private QualifiedName selection;
+        private Name alias;
 
-        public QualifiedObject Selection
+        public QualifiedName Selection
         {
             get
             {
@@ -44,7 +44,7 @@ namespace FluentMySql
             }
         }
 
-        public UnqualifiedObject Alias
+        public Name Alias
         {
             get
             {
@@ -54,10 +54,10 @@ namespace FluentMySql
 
         public SelectExpression As(string alias)
         {
-            return this.As(new UnqualifiedObject(alias));
+            return this.As(new Name(alias));
         }
 
-        public SelectExpression As(UnqualifiedObject alias)
+        public SelectExpression As(Name alias)
         {
             if (this.alias != null)
                 throw new InvalidOperationException("Alias already set.");
