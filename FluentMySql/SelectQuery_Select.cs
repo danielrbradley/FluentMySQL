@@ -23,6 +23,5 @@ namespace FluentMySql
 
             return query;
         }
-
     }
 }
