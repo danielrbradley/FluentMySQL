@@ -20,7 +20,7 @@ namespace FluentMySql
             if (selectExpressions.Length == 0)
                 return;
 
-            if (selectExpressions.Length == 1 && selectExpressions[0] is IEnumerable)
+            if (selectExpressions.Length == 1 && !(selectExpressions[0] is string) && selectExpressions[0] is IEnumerable)
             {
                 selectExpressions = ((IEnumerable)selectExpressions[0]).Cast<object>().ToArray();
             }

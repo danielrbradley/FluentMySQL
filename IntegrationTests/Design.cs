@@ -20,6 +20,15 @@ namespace IntegrationTests
         }
 
         [TestMethod]
+        public void SelectFromCustom()
+        {
+            var query = Query.Select("`page_id` AS `id`, `title`, `created`, `modified`").From("page");
+            var expected = "SELECT `page_id` AS `id`, `title`, `created`, `modified` FROM `page`;";
+            var actual = query.BuildSql();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void SelectFromPredefined()
         {
             var selectColumns = new List<SelectExpression>()
