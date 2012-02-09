@@ -43,5 +43,16 @@ namespace IntegrationTests
             var actual = query.BuildSql();
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void SelectFromWhere()
+        {
+            var query = Query.Select("page_id", "title", "created", "modified").From("page").Where("title", Op.Equals, new Param("arg1", "A title"));
+            var expected = "SELECT `page_id`, `title`, `created`, `modified` FROM `page` WHERE `title` = @arg1;";
+            var actual = query.BuildSql();
+            Assert.AreEqual(expected, actual);
+            var parameters = query.GetParameters();
+        }
+
     }
 }
