@@ -13,3 +13,7 @@ Consistency: The feature-set and design should aim to be one-to-one with the MyS
 Specific: Want to solve a fairly narrow problem, but solve it well. If this works well, then hopefully the same principals could be applied for other such grammars or frameworks. 
 
 Immutability: A single query object should not be able to be modified; rather, new copies should be produced on each modification. This makes the approach more akin to that of functional programming (and F# was also a serious consideration for this project).
+
+Getting Started
+==========
+I'm currently starting by drawing up some kind of design in the IntegrationTests\Design.cs file. This should act as a pretty good example of the libraries use.
